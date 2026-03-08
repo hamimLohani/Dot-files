@@ -1,5 +1,5 @@
 -- ==============================
--- Neovim IDE Setup (Stable & Modern)
+-- Neovim IDE Setup (Stable, Modern & vs code theme)
 -- ==============================
 
 -- Suppress specific Treesitter errors
@@ -103,16 +103,16 @@ pcall(function()
   })
   vim.cmd([[colorscheme vscode]])
 
-  -- Brighter, more vibrant colors
+  -- VSCode Dark+ inspired colors
   local colors = {
-    vscBlue = '#00D9FF',       -- variables (brighter cyan-blue)
-    vscYellow = '#FFE66D',     -- functions (brighter yellow)
-    vscGreen = '#4FFFB0',      -- types/classes (brighter green)
-    vscRed = '#FF6B6B',        -- errors (brighter red)
-    vscOrange = '#FFB86C',     -- strings (brighter orange)
-    vscMagenta = '#FF79C6',    -- control flow (brighter magenta)
-    vscGrey = '#A0A0A0',       -- comments (lighter grey)
-    vscViolet = '#BD93F9',     -- constants (brighter violet)
+    vscBlue = '#9CDCFE',       -- variables
+    vscYellow = '#DCDCAA',     -- functions
+    vscGreen = '#4EC9B0',      -- types/classes
+    vscRed = '#F44747',        -- errors
+    vscOrange = '#CE9178',     -- strings
+    vscMagenta = '#C586C0',    -- control flow
+    vscGrey = '#808080',       -- comments
+    vscViolet = '#646695',     -- constants
   }
 
   -- Set up semantic token highlights
@@ -120,91 +120,71 @@ pcall(function()
     vim.api.nvim_set_hl(0, name, opts)
   end
 
-  -- Variables and properties - bright cyan with bold
-  hi('Identifier', { fg = colors.vscBlue, bold = true })
-  hi('@variable', { fg = colors.vscBlue, bold = true })
-  hi('@property', { fg = colors.vscBlue, bold = true })
+  -- Variables and properties
+  hi('Identifier', { fg = colors.vscBlue })
+  hi('@variable', { fg = colors.vscBlue })
+  hi('@property', { fg = colors.vscBlue })
   hi('@parameter', { fg = colors.vscBlue })
 
-  -- Functions and methods - bright yellow with bold
-  hi('Function', { fg = colors.vscYellow, bold = true })
-  hi('@function', { fg = colors.vscYellow, bold = true })
-  hi('@method', { fg = colors.vscYellow, bold = true })
+  -- Functions and methods
+  hi('Function', { fg = colors.vscYellow })
+  hi('@function', { fg = colors.vscYellow })
+  hi('@method', { fg = colors.vscYellow })
 
-  -- Types and classes - bright green with bold
-  hi('@type', { fg = colors.vscGreen, bold = true })
-  hi('@constructor', { fg = colors.vscGreen, bold = true })
+  -- Types and classes
+  hi('@type', { fg = colors.vscGreen })
+  hi('@constructor', { fg = colors.vscGreen })
 
-  -- Control flow - bright magenta with bold
-  hi('@keyword', { fg = colors.vscMagenta, bold = true })
-  hi('@conditional', { fg = colors.vscMagenta, bold = true })
-  hi('@repeat', { fg = colors.vscMagenta, bold = true })
+  -- Control flow
+  hi('@keyword', { fg = colors.vscMagenta })
+  hi('@conditional', { fg = colors.vscMagenta })
+  hi('@repeat', { fg = colors.vscMagenta })
 
-  -- Constants and strings - bright with bold
-  hi('@string', { fg = colors.vscOrange, bold = true })
-  hi('@constant', { fg = colors.vscViolet, bold = true })
-  hi('@number', { fg = colors.vscViolet, bold = true })
+  -- Constants and strings
+  hi('@string', { fg = colors.vscOrange })
+  hi('@constant', { fg = colors.vscViolet })
 
   -- Comments
   hi('@comment', { fg = colors.vscGrey, italic = true })
-  
-  -- Make operators and punctuation colorful
-  hi('@operator', { fg = '#FF79C6', bold = true })
-  hi('@punctuation.bracket', { fg = '#8BE9FD', bold = true })
-  hi('@punctuation.delimiter', { fg = '#50FA7B' })
-  
-  -- Bash/Shell specific highlights
-  hi('@function.builtin.bash', { fg = colors.vscYellow, bold = true })
-  hi('@constant.builtin.bash', { fg = colors.vscViolet, bold = true })
-  hi('@variable.builtin.bash', { fg = colors.vscBlue, bold = true })
-  hi('@string.special.path.bash', { fg = colors.vscOrange, bold = true })
-  hi('@keyword.bash', { fg = colors.vscMagenta, bold = true })
-  
-  -- Zsh specific highlights
-  hi('@function.builtin.zsh', { fg = colors.vscYellow, bold = true })
-  hi('@constant.builtin.zsh', { fg = colors.vscViolet, bold = true })
-  hi('@variable.builtin.zsh', { fg = colors.vscBlue, bold = true })
-  hi('@string.special.path.zsh', { fg = colors.vscOrange, bold = true })
-  hi('@keyword.zsh', { fg = colors.vscMagenta, bold = true })
 end)
 
 -- VSCode-like highlight tweaks: make variables, functions and delimiters stand out
 pcall(function()
-  -- Brighter, more vibrant palette
+  -- Colors approximating VSCode Dark palette
   local pal = {
-    variable = "#00D9FF",   -- bright cyan
-    func = "#FFE66D",       -- bright yellow
-    delimiter1 = "#FF6B6B", -- bright red
-    delimiter2 = "#FFE66D", -- bright yellow
-    delimiter3 = "#50FA7B", -- bright green
-    delimiter4 = "#8BE9FD", -- bright blue
-    delimiter5 = "#FF79C6", -- bright pink
-    delimiter6 = "#00FFFF", -- bright cyan
+    variable = "#9CDCFE",   -- light blue
+    func = "#DCDCAA",       -- light yellow
+    delimiter1 = "#E06C75", -- red
+    delimiter2 = "#E5C07B", -- yellow
+    delimiter3 = "#98C379", -- green
+    delimiter4 = "#61AFEF", -- blue
+    delimiter5 = "#C678DD", -- purple
+    delimiter6 = "#56B6C2", -- cyan
   }
 
-  -- Treesitter groups with bold
-  vim.api.nvim_set_hl(0, "TSVariable", { fg = pal.variable, bold = true })
-  vim.api.nvim_set_hl(0, "TSProperty", { fg = pal.variable, bold = true })
-  vim.api.nvim_set_hl(0, "Identifier", { fg = pal.variable, bold = true })
-  vim.api.nvim_set_hl(0, "TSFunction", { fg = pal.func, bold = true })
-  vim.api.nvim_set_hl(0, "Function", { fg = pal.func, bold = true })
+  -- Treesitter groups
+  vim.api.nvim_set_hl(0, "TSVariable", { fg = pal.variable })
+  vim.api.nvim_set_hl(0, "TSProperty", { fg = pal.variable })
+  vim.api.nvim_set_hl(0, "Identifier", { fg = pal.variable })
+  vim.api.nvim_set_hl(0, "TSFunction", { fg = pal.func })
+  vim.api.nvim_set_hl(0, "Function", { fg = pal.func })
   vim.api.nvim_set_hl(0, "TSParameter", { fg = pal.variable })
 
-  -- Rainbow delimiter groups with bold
-  vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = pal.delimiter1, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { fg = pal.delimiter3, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = pal.delimiter2, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = pal.delimiter4, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { fg = pal.delimiter5, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { fg = pal.delimiter6, bold = true })
+  -- Rainbow delimiter groups (nvim-ts-rainbow uses RainbowDelimiterX)
+  vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = pal.delimiter1 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { fg = pal.delimiter3 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = pal.delimiter2 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = pal.delimiter4 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { fg = pal.delimiter5 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { fg = pal.delimiter6 })
 
-  -- Some rainbow plugins use numbered groups
-  vim.api.nvim_set_hl(0, "RainbowDelimiter1", { fg = pal.delimiter1, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiter2", { fg = pal.delimiter2, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiter3", { fg = pal.delimiter3, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiter4", { fg = pal.delimiter4, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiter5", { fg = pal.delimiter5, bold = true })
-  vim.api.nvim_set_hl(0, "RainbowDelimiter6", { fg = pal.delimiter6, bold = true })
+  -- Some rainbow plugins use numbered groups, set a few common ones too
+  vim.api.nvim_set_hl(0, "RainbowDelimiter1", { fg = pal.delimiter1 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiter2", { fg = pal.delimiter2 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiter3", { fg = pal.delimiter3 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiter4", { fg = pal.delimiter4 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiter5", { fg = pal.delimiter5 })
+  vim.api.nvim_set_hl(0, "RainbowDelimiter6", { fg = pal.delimiter6 })
 end)
 vim.o.number = true
 vim.o.relativenumber = false
