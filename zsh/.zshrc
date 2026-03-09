@@ -63,10 +63,15 @@ source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # search a file with preview and open with nvim 
 alias openWithNvim='nvim $(fzf -m --preview="bat --color=always {}")'
-alias ls='eza'
+alias ls='ls -p --color=auto'
+alias la='eza -la'
 alias cat='bat'
-
+alias c='clear'
 EDITOR='nvim'
+
+# Enable help command in zsh
+autoload -Uz run-help
+alias help=run-help
 
 
 
@@ -109,8 +114,10 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.13/libexec/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+# Disabled automatic pyenv init to stop per-shell auto-activation of Python
+# If you want to re-enable pyenv initialization, uncomment the two lines below.
+# eval "$(pyenv init --path)"
+# eval "$(pyenv init -)"
 export JAVA_HOME=/opt/homebrew/Cellar/openjdk/25
 
 # enable 24-bit color in terminal
